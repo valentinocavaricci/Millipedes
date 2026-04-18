@@ -21,6 +21,29 @@ This system is built using an Arduino Mega and uses four simple enumerated state
   -- MICROSD CARD loaded with AUDIO FILES FAT 32 format. 
   -- WINDOWS / MAC OS UP TO DATE
 
+
+##Key Components
+
+Arduino Controller
+The Arduino acts as the central controller for the exhibit. It manages state transitions, timing, button input, LED behavior, and communication with the audio module.
+
+State Machine
+The state machine defines the exhibit’s overall behavior. It ensures that the sequence always follows the same structure and prevents invalid transitions during operation.
+
+Button Input
+The button is the visitor’s only direct interaction with the system. It starts the presentation only when the system is in the idle state.
+
+LED Outputs
+The LEDs provide both visitor guidance and exhibit effects:
+
+* Green LED indicates the exhibit is available
+* Exterior Red LED indicates the presentation is active
+* Interior Red LED is used during the early presentation phase
+* UV LED is used during the fluorescence viewing phase
+
+DFPlayer Mini Audio Module
+The DFPlayer Mini handles playback of the audio tracks used during the exhibit. If it is not detected at startup, the system continues running the lighting sequence without audio.
+
 ### Installing
 
 * Download this repo
@@ -40,6 +63,18 @@ This system is built using an Arduino Mega and uses four simple enumerated state
  Press the button to start sequence
  View debug messages
 ```
+
+Design Notes
+A few important things to know before editing the code----
+
+* This version was built for one exhibit controller
+* Only one presentation is meant to run at a time
+* If the button is pressed again during an active presentation, nothing happens
+* The current audio setup requires a board that supports Serial1
+* The phase timings are hardcoded in the sketch right now
+
+
+
 
 ## Help
 
