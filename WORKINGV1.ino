@@ -21,7 +21,6 @@ bool lastButtonState = HIGH;
 bool audioReady = false;
 unsigned long stateStartTime = 0;
 
-
 const unsigned long phase1Time = 30000;   
 const unsigned long phase2Time = 60000;   
 const unsigned long phase3Time = 30000;   
@@ -45,6 +44,7 @@ void setIdleState() {
   digitalWrite(exteriorRedLED, LOW);
   digitalWrite(interiorRedLED, HIGH);
   digitalWrite(uvLED, LOW);
+
   stopAudio();
   Serial.println("IDLE");
 }
@@ -54,6 +54,7 @@ void setPhase1() {
   digitalWrite(exteriorRedLED, HIGH);
   digitalWrite(interiorRedLED, HIGH);
   digitalWrite(uvLED, LOW);
+
   playTrack(1);   
   Serial.println("PHASE1");
 }
@@ -62,7 +63,8 @@ void setPhase2() {
   digitalWrite(greenLED, LOW);
   digitalWrite(exteriorRedLED, HIGH);
   digitalWrite(interiorRedLED, LOW);
-  digitalWrite(uvLED, HIGH);
+  digitalWrite(uvLED, LOW);
+
   playTrack(2);  
   Serial.println("PHASE2");
 }
@@ -71,7 +73,8 @@ void setPhase3() {
   digitalWrite(greenLED, LOW);
   digitalWrite(exteriorRedLED, HIGH);
   digitalWrite(interiorRedLED, LOW);
-  digitalWrite(uvLED, LOW);
+  digitalWrite(uvLED, HIGH);
+
   playTrack(3);  
   Serial.println("PHASE3");
 }
@@ -91,7 +94,7 @@ void setup() {
 
   if (player.begin(Serial1)) {
     audioReady = true;
-    player.volume(25);   
+    player.volume(29);   
     Serial.println("DFPlayer detected");
   } else {
     Serial.println("DFPlayer NOT detected ! lights only");
